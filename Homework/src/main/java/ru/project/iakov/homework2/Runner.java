@@ -9,8 +9,13 @@ public class Runner {
         Configuration configuration = new Configuration();
         configuration.configure();
 
-        try (SessionFactory sessionFactory = configuration.buildSessionFactory()) {
-            Session session = sessionFactory.openSession();
+        try (SessionFactory sessionFactory = configuration.buildSessionFactory();
+            Session session = sessionFactory.openSession();) {
+            session.beginTransaction();
+
+            session.save(User.builder());
+
+            session.getTransaction().commit();
         }
     }
 }
