@@ -1,4 +1,6 @@
-package ru.project.iakov.homework2;
+package ru.project.iakov.homework2.dao;
+
+import ru.project.iakov.homework2.User;
 
 import java.util.List;
 import java.util.Optional;
