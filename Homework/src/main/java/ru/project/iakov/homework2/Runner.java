@@ -48,7 +48,6 @@ public class Runner {
         int age = readInt("Возраст: ");
 
         User user = User.builder()
-                .id(id)
                 .name(name)
                 .email(email)
                 .age(age)
