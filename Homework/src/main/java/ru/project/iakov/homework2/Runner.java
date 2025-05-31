@@ -2,6 +2,7 @@ package ru.project.iakov.homework2;
 
 import ru.project.iakov.homework2.dao.UserDao;
 import ru.project.iakov.homework2.dao.UserDaoImpl;
+import ru.project.iakov.homework2.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Runner {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final UserDao userDao = new UserDaoImpl();
+    private static final UserService userService = new UserService(new UserDaoImpl());
 
     public static void main(String[] args) {
         while (true) {
@@ -42,7 +43,6 @@ public class Runner {
     }
 
     private static void createUser() {
-        long id = readLong("ID: ");
         String name = readLine("Имя: ");
         String email = readLine("Email: ");
         int age = readInt("Возраст: ");
@@ -54,13 +54,13 @@ public class Runner {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        userDao.create(user);
+        userService.createUser(user);
         System.out.println("Пользователь создан.");
     }
 
     private static void findUserById() {
         long id = readLong("Введите ID пользователя: ");
-        Optional<User> userOpt = userDao.findById(id);
+        Optional<User> userOpt = userService.findById(id);
         userOpt.ifPresentOrElse(
                 System.out::println,
                 () -> System.out.println("Пользователь не найден.")
@@ -68,7 +68,7 @@ public class Runner {
     }
 
     private static void findAllUsers() {
-        List<User> users = userDao.findAll();
+        List<User> users = userService.findAll();
         if (users.isEmpty()) {
             System.out.println("Нет пользователей в базе.");
         } else {
@@ -78,7 +78,7 @@ public class Runner {
 
     private static void updateUser() {
         long id = readLong("ID обновляемого пользователя: ");
-        Optional<User> userOpt = userDao.findById(id);
+        Optional<User> userOpt = userService.findById(id);
 
         if (userOpt.isPresent()) {
             User user = userOpt.get();
@@ -90,7 +90,7 @@ public class Runner {
             user.setEmail(email.isEmpty() ? user.getEmail() : email);
             user.setAge(age <= 0 ? user.getAge() : age);
 
-            userDao.update(user);
+            userService.update(user);
             System.out.println("Пользователь обновлён.");
         } else {
             System.out.println("Пользователь с таким ID не найден.");
@@ -99,7 +99,7 @@ public class Runner {
 
     private static void deleteUser() {
         long id = readLong("ID пользователя для удаления: ");
-        userDao.delete(id);
+        userService.delete(id);
         System.out.println("Пользователь удалён (если существовал).");
     }
 
