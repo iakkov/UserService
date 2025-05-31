@@ -29,6 +29,7 @@ public class UserServiceTest {
 
         verify(userDao, times(1)).create(user);
     }
+
     @Test
     public void testGetUserById() {
         User user = new User();
