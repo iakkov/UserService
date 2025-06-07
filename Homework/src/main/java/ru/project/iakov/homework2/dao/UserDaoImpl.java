@@ -1,5 +1,6 @@
 package ru.project.iakov.homework2.dao;
 
+import jakarta.persistence.PersistenceException;
 import ru.project.iakov.homework2.HibernateUtil;
 import ru.project.iakov.homework2.User;
 import org.hibernate.Session;
