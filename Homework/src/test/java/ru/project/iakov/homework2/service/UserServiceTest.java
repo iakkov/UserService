@@ -8,6 +8,7 @@ import ru.project.iakov.homework2.dao.UserDao;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,17 +24,15 @@ public class UserServiceTest {
         userService = new UserService(userDao);
     }
 
+    @DisplayName("Создание пользователя")
     @Test
-    public void testCreateUser() {
+    public void createUser() {
         User user = new User();
         userService.createUser(user);
 
         verify(userDao, times(1)).create(user);
     }
 
-    /**
-     * Тесты на проверку поиска пользаков
-     */
     @DisplayName("Пользователь найден по ID")
     @Test
     public void findById_shouldReturnUser_whenUserExist() {
@@ -81,6 +80,7 @@ public class UserServiceTest {
         verifyNoInteractions(userDao);
     }
 
+    @DisplayName("Получение списка всех пользователей")
     @Test
     public void testGetAllUsers() {
         List<User> users = Arrays.asList(new User(), new User());
@@ -92,8 +92,9 @@ public class UserServiceTest {
         verify(userDao, times(1)).findAll();
     }
 
+    @DisplayName("Обновление данных пользователя")
     @Test
-    public void testUpdateUser() {
+    public void updateUser() {
         User user = new User();
         user.setId(2L);
 
@@ -102,10 +103,23 @@ public class UserServiceTest {
         verify(userDao, times(1)).update(user);
     }
 
+    @DisplayName("Пользователь успешно удален")
     @Test
-    public void testDeleteUser() {
+    public void deleteUser_whenUserExist() {
         userService.delete(3L);
 
         verify(userDao, times(1)).delete(3L);
+    }
+
+    @DisplayName("При удалении пользователь не найден")
+    @Test
+    public void deleteUser_whenUserNotExist() {
+        Long noExistId = 999L;
+        doThrow(new NoSuchElementException("Пользователь не найден"))
+                .when(userDao).delete(noExistId);
+
+        assertThrows(NoSuchElementException.class, () -> userService.delete(noExistId));
+
+        verify(userDao).delete(noExistId);
     }
 }
