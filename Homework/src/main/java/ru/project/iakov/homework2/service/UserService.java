@@ -16,7 +16,9 @@ public class UserService {
         userDao.create(user);
     }
     public Optional<User> findById(Long id) {
-        return userDao.findById(id);
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException();
+        } else return userDao.findById(id);
     }
     public List<User> findAll() {
         return userDao.findAll();
