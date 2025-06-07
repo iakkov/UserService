@@ -1,6 +1,7 @@
-package ru.project.iakov.homework2;
+/*
+package ru.project.iakov.homework2.legacy;
 
-import ru.project.iakov.homework2.dao.UserDao;
+import ru.project.iakov.homework2.User;
 import ru.project.iakov.homework2.dao.UserDaoImpl;
 import ru.project.iakov.homework2.service.UserService;
 
@@ -134,4 +135,4 @@ public class Runner {
         System.out.print(prompt);
         return scanner.nextLine().trim();
     }
-}
+}*/

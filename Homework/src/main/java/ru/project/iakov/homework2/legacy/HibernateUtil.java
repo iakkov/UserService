@@ -1,8 +1,10 @@
-package ru.project.iakov.homework2;
+/*
+package ru.project.iakov.homework2.legacy;
 
 import lombok.Getter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import ru.project.iakov.homework2.User;
 
 public class HibernateUtil {
     @Getter
@@ -35,4 +37,4 @@ public class HibernateUtil {
 
         sessionFactory = configuration.buildSessionFactory();
     }
-}
+}*/

@@ -1,4 +1,5 @@
-package ru.project.iakov.homework2.dao;
+/*
+package ru.project.iakov.homework2.legacy.dao;
 
 import ru.project.iakov.homework2.User;
 
@@ -11,4 +12,4 @@ public interface UserDao {
     List<User> findAll();
     void update(User user);
     void delete(Long id);
-}
+}*/

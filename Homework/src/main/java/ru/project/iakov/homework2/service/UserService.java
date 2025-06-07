@@ -1,32 +1,53 @@
 package ru.project.iakov.homework2.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.project.iakov.homework2.User;
-import ru.project.iakov.homework2.dao.UserDao;
+import ru.project.iakov.homework2.UserDto;
+import ru.project.iakov.homework2.UserMapper;
+import ru.project.iakov.homework2.UserRepository;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Service
 public class UserService {
-    private final UserDao userDao;
+    private UserRepository userRepository;
+    private UserMapper userMapper;
 
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
+    @Autowired
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
-    public void createUser(User user) {
-        userDao.create(user);
+    public UserDto createUser(UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        User savedUser = userRepository.save(user);
+        return userMapper.toDto(savedUser);
     }
-    public Optional<User> findById(Long id) {
-        if (id == null || id <= 0) {
+    public UserDto findById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException());
+        return userMapper.toDto(user);
+    }
+    public List<UserDto> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
+    }
+    public UserDto updateUser(Long id, UserDto userDto) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException());
+        existingUser.setName(userDto.getName());
+        existingUser.setEmail(userDto.getEmail());
+        User updatedUser = userRepository.save(existingUser);
+        return userMapper.toDto(updatedUser);
+    }
+    public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
             throw new IllegalArgumentException();
-        } else return userDao.findById(id);
-    }
-    public List<User> findAll() {
-        return userDao.findAll();
-    }
-    public void update(User user) {
-        userDao.update(user);
-    }
-    public void delete(Long id) {
-        userDao.delete(id);
+        }
+        userRepository.deleteById(id);
     }
 }
