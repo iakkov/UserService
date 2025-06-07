@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class UserDto {
+    @Getter
+    @Setter
     private Long id;
     private String name;
     private String email;
