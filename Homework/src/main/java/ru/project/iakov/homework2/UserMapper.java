@@ -13,6 +13,7 @@ public class UserMapper {
                 .build();
 
     }
+
     public User toEntity(UserDto dto) {
         return User.builder()
                 .id(dto.getId())

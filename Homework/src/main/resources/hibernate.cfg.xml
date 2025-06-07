@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE hibernate-configuration PUBLIC
@@ -21,4 +22,4 @@
 
         <mapping class="ru.project.iakov.homework2.User"/>
     </session-factory>
-</hibernate-configuration>
+</hibernate-configuration>-->
