@@ -1,10 +1,11 @@
-package ru.project.iakov.homework2.service;
+/*
+package ru.project.iakov.homework2.legacy.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import ru.project.iakov.homework2.User;
-import ru.project.iakov.homework2.dao.UserDao;
+import ru.project.iakov.homework2.legacy.dao.UserDao;
 
 import java.util.Arrays;
 import java.util.List;
@@ -122,4 +123,4 @@ public class UserServiceTest {
 
         verify(userDao).delete(noExistId);
     }
-}
+}*/

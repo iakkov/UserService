@@ -1,12 +1,15 @@
-package ru.project.iakov.homework2;
+/*
+package ru.project.iakov.homework2.legacy;
 
 import jakarta.persistence.PersistenceException;
 import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import ru.project.iakov.homework2.dao.UserDao;
-import ru.project.iakov.homework2.dao.UserDaoImpl;
+import ru.project.iakov.homework2.User;
+import ru.project.iakov.homework2.legacy.dao.UserDao;
+import ru.project.iakov.homework2.legacy.dao.UserDaoImpl;
+import ru.project.iakov.homework2.legacy.HibernateUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -155,4 +158,4 @@ public class SimpleContainerTest {
     static void stopContainer() {
         postgres.stop();
     }
-}
+}*/

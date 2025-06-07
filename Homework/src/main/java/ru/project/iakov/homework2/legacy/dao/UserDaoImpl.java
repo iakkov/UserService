@@ -1,7 +1,7 @@
-package ru.project.iakov.homework2.dao;
+/*
+package ru.project.iakov.homework2.legacy.dao;
 
-import jakarta.persistence.PersistenceException;
-import ru.project.iakov.homework2.HibernateUtil;
+import ru.project.iakov.homework2.legacy.HibernateUtil;
 import ru.project.iakov.homework2.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -54,4 +54,4 @@ public class UserDaoImpl implements UserDao {
             tx.commit();
         }
     }
-}
+}*/
