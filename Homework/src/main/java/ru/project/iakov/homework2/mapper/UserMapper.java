@@ -1,5 +1,7 @@
-package ru.project.iakov.homework2;
+package ru.project.iakov.homework2.mapper;
 import org.springframework.stereotype.Component;
+import ru.project.iakov.homework2.entity.User;
+import ru.project.iakov.homework2.dto.UserDto;
 
 @Component
 public class UserMapper {

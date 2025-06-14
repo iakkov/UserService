@@ -20,6 +20,6 @@
 
         <property name="hibernate.use_sql_comments">true</property>
 
-        <mapping class="ru.project.iakov.homework2.User"/>
+        <mapping class="ru.project.iakov.homework2.entity.User"/>
     </session-factory>
 </hibernate-configuration>-->

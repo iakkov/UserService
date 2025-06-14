@@ -1,4 +1,4 @@
-package ru.project.iakov.homework2;
+package ru.project.iakov.homework2.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
