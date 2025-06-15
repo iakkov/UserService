@@ -28,7 +28,11 @@ public class UserService implements Serializable {
     public UserDto createUser(UserDto userDto) {
         User user = userMapper.toEntity(userDto);
         User savedUser = userRepository.save(user);
-        kafkaProducer.sendUserEvent(new UserEvent(savedUser.getEmail(), "CREATED"));
+        kafkaProducer.sendUserEvent(
+                new UserEvent(
+                        savedUser.getEmail(),
+                        "Уведомление",
+                        "CREATED"));
         return userMapper.toDto(savedUser);
     }
     public UserDto findById(Long id) {
@@ -54,6 +58,10 @@ public class UserService implements Serializable {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         userRepository.deleteById(id);
-        kafkaProducer.sendUserEvent(new UserEvent(user.getEmail(), "DELETED"));
+        kafkaProducer.sendUserEvent(
+                new UserEvent(
+                        user.getEmail(),
+                        "Уведомление",
+                        "DELETED"));
     }
 }

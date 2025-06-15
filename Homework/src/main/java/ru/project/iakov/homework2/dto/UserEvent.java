@@ -8,5 +8,6 @@ import lombok.*;
 @Builder
 public class UserEvent {
     private String email;
+    private String subject;
     private String eventType;
 }
