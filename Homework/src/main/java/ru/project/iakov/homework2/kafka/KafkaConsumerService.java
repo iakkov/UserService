@@ -20,9 +20,9 @@ public class KafkaConsumerService {
     public void listen(UserEvent event) {
         log.info("Получено событие из Kafka: {}", event);
         String email = event.getEmail();
-        String eventType = event.getEventType();
-        if (event == null || event.getEmail() == null || event.getEventType() == null) {
-            log.warn("Пропущено сообщение: event, email или eventType = null");
+        String subject = event.getSubject();
+        if (event == null || event.getEmail() == null || event.getEventType() == null || event.getSubject() == null) {
+            log.warn("Пропущено сообщение: один из параметров null");
             return;
         }
 
@@ -36,7 +36,7 @@ public class KafkaConsumerService {
         };
 
         try {
-            emailService.sendEmail(email, text);
+            emailService.sendEmail(email, subject, text);
             log.info("Email успешно отправлен на {}", event.getEmail());
         } catch (Exception e) {
             log.error("Ошибка при отправке email на {}: {}", event.getEmail(), e.getMessage(), e);
