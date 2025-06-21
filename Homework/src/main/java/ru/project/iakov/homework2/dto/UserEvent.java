@@ -7,7 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UserEvent {
+    @NonNull
     private String email;
+    @NonNull
     private String subject;
+    @NonNull
     private String eventType;
 }

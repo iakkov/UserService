@@ -10,9 +10,14 @@ import java.time.LocalDateTime;
 public class UserDto {
     @Getter
     @Setter
+    @NonNull
     private Long id;
+    @NonNull
     private String name;
+    @NonNull
     private String email;
+    @NonNull
     private Integer age;
+    @NonNull
     private LocalDateTime createdAt;
 }
