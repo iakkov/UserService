@@ -1,6 +1,7 @@
 package ru.project.iakov.homework2.dto;
 
 import lombok.*;
+import ru.project.iakov.homework2.model.EventType;
 
 @Data
 @AllArgsConstructor
@@ -12,5 +13,5 @@ public class UserEvent {
     @NonNull
     private String subject;
     @NonNull
-    private String eventType;
+    private EventType eventType;
 }

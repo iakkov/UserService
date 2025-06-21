@@ -21,18 +21,10 @@ public class KafkaConsumerService {
         log.info("Получено событие из Kafka: {}", event);
         String email = event.getEmail();
         String subject = event.getSubject();
-        if (event == null || event.getEmail() == null || event.getEventType() == null || event.getSubject() == null) {
-            log.warn("Пропущено сообщение: один из параметров null");
-            return;
-        }
 
         String text = switch (event.getEventType()) {
-            case "CREATED" -> "Здравствуйте! Ваш аккаунт был создан.";
-            case "DELETED" -> "Здравствуйте! Ваш аккаунт был удалён.";
-            default -> {
-                log.warn("Неизвестный тип события: {}", event.getEventType());
-                yield "Неизвестное событие.";
-            }
+            case CREATED -> "Здравствуйте! Ваш аккаунт был создан.";
+            case DELETED -> "Здравствуйте! Ваш аккаунт был удалён.";
         };
 
         try {
