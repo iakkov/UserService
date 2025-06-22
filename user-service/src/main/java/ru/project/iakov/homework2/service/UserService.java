@@ -12,7 +12,6 @@ import ru.project.iakov.homework2.mapper.UserMapper;
 import ru.project.iakov.homework2.model.EventType;
 import ru.project.iakov.homework2.repository.UserRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

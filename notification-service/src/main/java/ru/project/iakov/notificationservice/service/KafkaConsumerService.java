@@ -18,8 +18,7 @@ public class KafkaConsumerService {
     private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = "user-events", groupId = "notification-group")
-    public void listen(ConsumerRecord<String, String> record) {
-        String message = record.value();
+    public void listen(String message) {
         log.info("Kafka message: {}", message);
         try {
             UserEvent event = objectMapper.readValue(message, UserEvent.class);

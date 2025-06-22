@@ -3,6 +3,7 @@ package ru.project.iakov.notificationservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.project.iakov.notificationservice.dto.EmailRequest;
 import ru.project.iakov.notificationservice.model.EventType;
@@ -12,6 +13,7 @@ import ru.project.iakov.notificationservice.service.EmailService;
 @RestController
 @RequestMapping("/api/v1/email")
 @RequiredArgsConstructor
+@Validated
 public class EmailController {
 
     private final EmailService emailService;
