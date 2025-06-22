@@ -11,5 +11,6 @@ import ru.project.iakov.notificationservice.model.EventType;
 @Builder
 public class UserEvent {
     private String email;
+    private String subject;
     private EventType eventType;
 }
