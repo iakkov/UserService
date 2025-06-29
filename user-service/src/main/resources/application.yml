@@ -1,4 +1,8 @@
 spring:
+  application:
+    name: user-service
+  config:
+    import: optional:configserver:http://localhost:8888
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -35,3 +39,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 server:
   port: 8080
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka
