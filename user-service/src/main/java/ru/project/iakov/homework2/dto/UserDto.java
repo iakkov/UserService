@@ -1,6 +1,6 @@
 package ru.project.iakov.homework2.dto;
-import lombok.*;
 
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Data
