@@ -57,16 +57,18 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./config:/config
+      - ./config-repo:/config
     depends_on:
       - discovery-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
   user-service:
     image: user-service:latest
     build:
       context: ./user-service
     ports:
-      - "8080:8080"
+      - "8082:8082"
     depends_on:
       - discovery-server
       - kafka
@@ -102,7 +104,7 @@ services:
     build:
       context: ./api-gateway
     ports:
-      - "8765:8765"
+      - "8080:8080"
     depends_on:
       - discovery-server
       - config-server
