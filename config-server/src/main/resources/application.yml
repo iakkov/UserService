@@ -7,8 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: file:../config-repo
-
+          uri: file:/config
 eureka:
   client:
     service-url:

@@ -15,7 +15,8 @@ spring:
           uri: lb://notification-service
           predicates:
             - Path=/api/v1/email/**
-
+  config:
+    import: optional:configserver:http://config-server:8888
 eureka:
   client:
     service-url:
