@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/v1/email/**
+  config:
+    import: optional:configserver:http://config-server:8888
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka

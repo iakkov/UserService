@@ -1,0 +1,115 @@
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: unless-stopped
+    user: postgres
+    environment:
+      POSTGRES_DB: postgres
+      PGUSER: postgres
+      POSTGRES_PASSWORD: postgres
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  discovery-server:
+    container_name: discovery-server
+    image: discovery-server:latest
+    build:
+      context: ./discovery-server
+    ports:
+      - "8761:8761"
+
+  config-server:
+    image: config-server:latest
+    build:
+      context: ./config-server
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./config-repo:/config
+    depends_on:
+      - discovery-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  user-service:
+    image: user-service:latest
+    build:
+      context: ./user-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - discovery-server
+      - kafka
+      - postgres
+      - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    env_file:
+      - .env
+
+  notification-service:
+    image: notification-service:latest
+    build:
+      context: ./notification-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - kafka
+      - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+    env_file:
+      - .env
+
+  api-gateway:
+    image: api-gateway:latest
+    build:
+      context: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+      - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+volumes:
+  pgdata:
+

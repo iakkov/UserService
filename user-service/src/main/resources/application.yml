@@ -1,8 +1,12 @@
 spring:
+  application:
+    name: user-service
+  config:
+    import: optional:configserver:http://configserver:8888
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://postgres:5432/postgres
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -35,3 +39,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 server:
   port: 8080
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka
