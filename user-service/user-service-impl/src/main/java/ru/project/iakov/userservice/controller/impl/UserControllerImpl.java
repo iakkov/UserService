@@ -19,32 +19,28 @@ public class UserControllerImpl implements UserController {
 
     private final UserServiceImpl userService;
 
-    @Operation(summary = "Get user by ID")
-    @GetMapping("/{id}")
+    @Override
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok(userService.findById(id));
     }
 
-    @Operation(summary = "Get all users")
-    @GetMapping
+    @Override
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    @Operation(summary = "Create user")
-    @PostMapping
+    @Override
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userRequest));
     }
 
-    @Operation(summary = "Update user information")
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable("id") UUID id, @RequestBody UserRequest userRequest) {
+    @Override
+    public ResponseEntity<UserResponse> updateUser(@PathVariable("id") UUID id,
+                                                   @RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(userService.updateUser(id, userRequest));
     }
 
-    @Operation(summary = "Delete user by ID")
-    @DeleteMapping("/{id}")
+    @Override
     public ResponseEntity<Void> deleteUser(@PathVariable("id") UUID id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
