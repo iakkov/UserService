@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-10-31--01-create-users-table
+      author: Iakov Lysenko
+      changes:
+        - createTable:
+            tableName: users
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+        - createIndex:
+            indexName: idx_users_email
+            tableName: users
+            schemaName: public
+            columns:
+              - column:
+                  name: email
+      rollback:
+        - dropTable:
+            tableName: users
+            schemaName: public
