@@ -26,7 +26,7 @@ public class User {
     @Id
     @EqualsAndHashCode.Include
     @ToString.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
@@ -41,7 +41,6 @@ public class User {
     @ToString.Include
     private int age;
 
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
     @PrePersist
@@ -52,3 +51,4 @@ public class User {
     }
 
 }
+

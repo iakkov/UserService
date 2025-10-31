@@ -1,6 +1,7 @@
 package ru.project.iakov.userservice.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import ru.project.iakov.userservice.domain.entity.User;
 import ru.project.iakov.userservice.dto.UserRequest;

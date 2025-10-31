@@ -1,6 +1,6 @@
 package ru.project.iakov.userservice.dto;
 
-import lombok.Builder;
+import java.util.UUID;
 
 /**
  * DTO to get response with information of User
@@ -13,9 +13,8 @@ import lombok.Builder;
  *
  * @author Iakov Lysenko
  */
-@Builder
 public record UserResponse(
-        Long id,
+        UUID id,
         String name,
         String email,
         int age
