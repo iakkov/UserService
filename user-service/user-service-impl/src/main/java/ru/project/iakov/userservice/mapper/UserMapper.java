@@ -1,15 +1,16 @@
 package ru.project.iakov.userservice.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
 import ru.project.iakov.userservice.domain.entity.User;
 import ru.project.iakov.userservice.dto.UserRequest;
 import ru.project.iakov.userservice.dto.UserResponse;
 
 /**
- *
+ * UserMapper for mapping User to UserResponse and UserRequest to User
+ *  
+ * @author Iakov Lysenko
  */
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
     UserResponse toResponse(User user);
