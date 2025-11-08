@@ -2,6 +2,8 @@ package ru.project.iakov.userservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.project.iakov.userservice.domain.entity.User;
@@ -31,6 +33,10 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final KafkaSender kafkaSender;
 
+    @Cacheable(
+            value = "user",
+            key = "#id"
+    )
     @Override
     public UserResponse findById(UUID id) {
         User user = userRepository.findById(id)
@@ -80,6 +86,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponse(savedUser);
     }
 
+    @CacheEvict(
+            value = "user",
+            key = "#id"
+    )
     @Override
     @Transactional
     public UserResponse updateUser(UUID id, UserRequest userRequest) {
@@ -105,6 +115,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponse(updatedUser);
     }
 
+    @CacheEvict(
+            value = "user",
+            key = "#id"
+    )
     @Override
     @Transactional
     public void deleteUser(UUID id) {
