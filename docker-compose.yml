@@ -39,9 +39,6 @@ services:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
     restart: unless-stopped
-    depends_on:
-      zookeeper:
-        condition: service_healthy
     ports:
       - "9092:9092"
       - "9093:9093"
@@ -58,6 +55,13 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+  redis:
+    image: redis:8.2.1
+    restart: on-failure
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
   user-service:
     image: user-service:latest
     build:
@@ -77,13 +81,6 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
     env_file:
       - .env
-  redis:
-    image: redis:8.2.1
-    restart: on-failure
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
 volumes:
   pgdata:
   redis_data:
