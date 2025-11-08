@@ -97,6 +97,8 @@
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
 
+
+
         <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -130,6 +132,19 @@
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <!-- Cache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+            <version>3.5.6</version>
+        </dependency>
+
+        <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
     </dependencies>
