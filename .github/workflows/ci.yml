@@ -21,9 +21,10 @@ jobs:
 
     - name: Build with Maven
       working-directory: user-service
-      run: mvn -B package --file pom.xml
+      run: mvn -B clean verify
 
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@v4
-      with: 
-        working-directory: user-service
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: user-service/target/surefire-reports/
